@@ -44,14 +44,14 @@ public class ArticleDashboard_BG_Su {
   		  driver.getCurrentUrl();
   		  Thread.sleep(5000);
   		 driver.findElement(By.id("platform")).click();
-  		Thread.sleep(5000);
-		  driver.navigate().to("https://qacheck-dev.metrosystems.net/articles");
-  		
+  		Thread.sleep(8000);
+		
   		 //profile
-  		  Thread.sleep(10000);
+  		 
     	//  driver.findElement(By.xpath("//*[@id='root']/div/div[1]/div/div/div/div/div/div[8]/div[1]/button/*[name()='svg']")).click();
     	  Thread.sleep(5000);
-    	  driver.findElement(By.xpath(" /html/body/div/div/div[1]/div/div/div/div/div/div[8]/div[1]/button")).click();
+    	  driver.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div/nav/div[3]/div[7]/div[1]/a/div")).click();
+    	  
     	  Thread.sleep(5000);
     	
     	  
@@ -62,12 +62,17 @@ public class ArticleDashboard_BG_Su {
    Thread.sleep(5000);
    Select language=  new Select( driver.findElement(By.xpath("//*[@id='language']")));
    language.selectByVisibleText("English");
-   Thread.sleep(5000);
+   Thread.sleep(2000);
    Select warehouse=  new Select( driver.findElement(By.xpath("//*[@id='otherWarehouses']")));
    warehouse.selectByValue("Musachevo");
+   								
+   driver.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div/nav/div[3]/div[7]/div[1]/div/div/div[1]/div[1]/div/div/button")).click();
+   Thread.sleep(5000);	
+   driver.navigate().to("https://qacheck-dev.metrosystems.net/articles");
+		
    
-   driver.findElement(By.xpath("//*[@id='root']/div/div[1]/div/div/div/div/div/div[12]/div/div/div/nav/a[1]/strong/a")).click();
-  		int countofinspected_articles=0;
+   
+   int countofinspected_articles=0;
    int i=1;
   		 int k=1;
   		 int confirmclicked=0;
@@ -101,19 +106,21 @@ public class ArticleDashboard_BG_Su {
   			 Thread.sleep(5000);
   			 if(k==6)
   				 k=1;
-  			 try {
+  			// try {
   				//to check whether action element is there are not (if exists go into loop)
-  			if(driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[2]/div/div[2]/div[3]/div/div/div/div/div[1]/table/tbody/tr["+i+"]/td[10]/button[@class='m-iconButton trash-color icon-left']"))!=null)
+  			 
+  			                            //*[@id="root"]/div/div/div[2]/div/div[2]/div[3]/div/div/div/div/div[1]/table/tbody/tr[1]/td[10]
+  			if(driver.findElement(By.xpath(" //*[@id=\"root\"]/div/div/div[2]/div/div[2]/div[3]/div/div/div/div/div[1]/table/tbody/tr["+i+"]/td[10]/*[name()='svg']"))!=null)
   			{
   				
 		        System.out.println("image not null pageno: "+j+"row no  "+i);
 		        js.executeScript("window.scrollBy(0,2000)");
 		        Thread.sleep(5000);
-		        //action element clicking
-		         driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[2]/div/div[2]/div[3]/div/div/div/div/div[1]/table/tbody/tr["+i+"]/td[10]/button[@class='m-iconButton trash-color icon-left']")).click();
+		        //action element clicking     //*[@id="root"]/div/div/div[2]/div/div[2]/div[3]/div/div/div/div/div[1]/table/tbody/tr[1]/td[10]
+		         driver.findElement(By.xpath("//*[@id='root']/div/div/div[2]/div/div[2]/div[3]/div/div/div/div/div[1]/table/tbody/tr["+i+"]/td[10]/*[name()='svg']")).click();
 		        System.out.println("action element clicked");
-		        Thread.sleep(5000);
-		       String articlename= driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[2]/div/div[1]/div[1]/div/div[1]/p[2]")).getText();
+		        Thread.sleep(5000);                               
+		       String articlename= driver.findElement(By.xpath(" //*[@id='root']/div/div/div[2]/div/div[1]/div[1]/div/div[1]/p[2]")).getText();
 		       System.out.println("article name:"+articlename);
 		       Thread.sleep(5000);
 		       
@@ -127,8 +134,10 @@ public class ArticleDashboard_BG_Su {
 		        		 Thread.sleep(1000);
 		        		 Robot robot = new Robot();
 				            
-				            Thread.sleep(2000);
-				            WebElement picEle = driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div["+m+"]/div/div[3]/div[1]/div/div/div/div/div[1]/img"));
+				            Thread.sleep(1000);
+				            												 //*[@id="root"]/div/div/div[2]/div/div[1]/div[2]/div[2]/div[3]/div/div/div[3]/div[1]/div/div/div/div/div[1]/img
+				                                                             //*[@id="root"]/div/div/div[2]/div/div[1]/div[2]/div[2]/div[1]/div/div/div[3]/div[1]/div/div/div/div/div[1]/img
+				            WebElement picEle = driver.findElement(By.xpath("//*[@id='root']/div/div/div[2]/div/div[1]/div[2]/div[2]/div["+m+"]/div/div/div[3]/div[1]/div/div/div/div/div[1]/img"));
 				            String pic = picEle.getAttribute("value");
 //				            test.pass(pic);
 				           
@@ -136,7 +145,7 @@ public class ArticleDashboard_BG_Su {
 				            robot.setAutoDelay(2000);
 				           
 				            Thread.sleep(2000);
-				            StringSelection selection = new StringSelection("E:\\selenium_new\\images\\applerotten.jpg");
+				            StringSelection selection = new StringSelection("E:\\selenium_new\\images\\img"+m+".jpg");
 				            Thread.sleep(2000);
 				            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
 				           
@@ -165,17 +174,30 @@ public class ArticleDashboard_BG_Su {
 		         Thread.sleep(100);
 		         
 		       
-		         
+		         try {
 		         driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div[2]/div/div[4]/div/div/input")).sendKeys("55");
-			       
+		         }
+		         catch(Exception e) {}
 			       for(int l=1;l<=36;l++) {
 		   	        	 try {
 		   	        		  js.executeScript("window.scrollBy(0,50)");
-		   	        		  Thread.sleep(000);
-		   	        		  driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div["+l+"]/div/div[4]/div/div/input")).sendKeys("test1");
-		   				   
 		   	        		  
-		   	        			        		   
+		   	        		  
+		   	        		                             //*[@id="root"]/div/div/div[2]/div/div[1]/div[2]/div[2]/div[4]/div/div/div[2]/div/label/button
+		   	        		driver.findElement(By.xpath("//*[@id='root']/div/div/div[2]/div/div[1]/div[2]/div[2]/div["+l+"]/div/div/div[2]/div/label/button")).click();
+		   	        		 
+		   	        	 }
+		   	        	 catch(Exception e) {}
+		   	        	 
+		   	        	 try {
+		   	        		//*[@id="root"]/div/div/div[2]/div/div[1]/div[2]/div[2]/div[2]/div/div/div[4]/div/div[2]/div[2]/input
+		   	        		  driver.findElement(By.xpath("//*[@id='root']/div/div/div[2]/div/div[1]/div[2]/div[2]/div["+l+"]/div/div/div[4]/div/div[2]/div[2]/input")).sendKeys("test1");
+		   				   
+		   	        	 }
+		   	        	 catch(Exception e) {}
+		   	        		//*[@id="root"]/div/div/div[2]/div/div[1]/div[2]/div[2]/div[16]/div/div/div[4]/div/div[2]/div[2]/input
+		   	        	 try {
+		   	        	 
 		   	        	 driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div["+l+"]/div/div[4]/div[2]/div/input")).sendKeys("test1");
 		   	                                                           //*[@id="root"]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div[1]/div/div[4]/div/div/input
 		   	        	 											   //*[@id="root"]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div[2]/div/div[4]/div[2]/div/input
@@ -184,6 +206,7 @@ public class ArticleDashboard_BG_Su {
 		   	        	 }
 		   	        	 catch(Exception e) {}
 		   	        	 }
+			       
 			       
 			       
 			       
@@ -233,14 +256,15 @@ public class ArticleDashboard_BG_Su {
                 
            	 Thread.sleep(3000);
                 
-                
+                try {
           	  driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[2]/div/div[1]/div[3]/div[3]/div[1]/div/div[2]/input")).sendKeys("HJJ567");
           	 Thread.sleep(3000);
           	  driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[2]/div/div[1]/div[3]/div[3]/div[2]/div/div[2]/input")).sendKeys("HGFTY567");
          	 Thread.sleep(3000);
           	  
           	  driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[2]/div/div[1]/div[3]/div[4]/div[4]/div/div[2]/input")).sendKeys("Inspected");
-          	   
+                }
+                catch(Exception e) {}
                 System.out.println("inspection result:"+s[k-1]);
                 if(k==1 || k==5) {
                 	driver.findElement(By.xpath("//button[contains(text(),'Inform Buyer')]")).click();
@@ -263,12 +287,13 @@ public class ArticleDashboard_BG_Su {
                 //search the article which is inspected
                 driver.findElement(By.xpath("//*[@id='id']")).sendKeys(articlename);
                 //click on search button to download report which is inspected
-                Thread.sleep(5000);
-                driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div/div[1]/div/span[2]/a")).click();
+                Thread.sleep(7000);         //*[@id="root"]/div/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div[1]/div/span[2]/*[name()='svg']
+                driver.findElement(By.xpath("//*[@id='root']/div/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div[1]/div/span[2]/*[name()='svg']")).click();
                 
                 Thread.sleep(5000);
                 //click on report to download
-                driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[2]/div/div[2]/div[3]/div/div/div/div/div[1]/table/tbody/tr/td[9]/div/a/span/span")).click();
+                                             //*[@id="root"]/div/div/div[2]/div/div[2]/div[3]/div/div/div/div/div[1]/table/tbody/tr[1]/td[9]/div/a/span/span
+                driver.findElement(By.xpath("//*[@id='root']/div/div/div[2]/div/div[2]/div[3]/div/div/div/div/div[1]/table/tbody/tr[1]/td[9]/div/a/span/span")).click();
                 Thread.sleep(5000);
                 
               WebElement searchbox= driver.findElement(By.xpath("//*[@id='id']"));
@@ -279,8 +304,11 @@ public class ArticleDashboard_BG_Su {
                 
                 System.out.println("clear");
                 //click on search button to download report which is inspected
-                driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div/div[1]/div/span[2]/a/*[name()='svg']")).click();
-              //*[@id='root']/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div/div[1]/div/span[2]/a/*[name()='svg']
+                driver.findElement(By.xpath("//*[@id='root']/div/div/div[2]/div/div[2]/div[2]/div/div/div[1]/div/div[1]/div/span[2]/*[name()='svg']")).click();
+                
+                
+                
+                //*[@id='root']/div/div[2]/div[2]/div/div[2]/div[2]/div/div[1]/div/div[1]/div/span[2]/a/*[name()='svg']
                 Thread.sleep(8000);
                   
                 
@@ -331,6 +359,7 @@ public class ArticleDashboard_BG_Su {
                 //to know how many action elements are there in a page
                 List<WebElement> elements = driver.findElements(By.xpath("//button[@class='m-iconButton trash-color icon-left']"));
  				 //action (edit)element
+                
  				System.out.println("no. of action element size: "+elements.size());
  				if(elements.size()>0) {
  					i=1;
@@ -339,14 +368,14 @@ public class ArticleDashboard_BG_Su {
                 
 		    }
 		      
-  			 }
+  			// }
   			 //if there is no action element just skip from exception
-  			 catch(Exception e) {
-  				System.out.println("no action element here, increment row "+"pageno: "+j+" rowno "+i+".");
-  				Thread.sleep(1000);
-  				
-  				js.executeScript("window.scrollBy(0,1000)");
-  			 }
+//  			 catch(Exception e) {
+//  				System.out.println("no action element here, increment row "+"pageno: "+j+" rowno "+i+".");
+//  				Thread.sleep(1000);
+//  				
+//  				js.executeScript("window.scrollBy(0,1000)");
+//  			 }
   			 i++;
   		 }
   		
